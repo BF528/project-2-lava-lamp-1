@@ -1,0 +1,21 @@
+#!/bin/bash -l
+
+#$ -P bf528
+#$ -cwd
+#$ -j y
+#$ -o /usr4/bf527/lkzhang/joblogs
+#$ -N cufflinks 
+#$ -pe mpi_16_tasks_per_node 16
+
+echo "Running job $JOB_ID"
+echo "Started: $(date +%F)"
+echo "Running in directory: $PWD"
+
+dir='/projectnb/bf528/users/lava-lamp/project-2-lava-lamp-1/samples/P0_1_tophat'
+
+#Load modules 
+module load cufflinks
+
+cufflinks --compatible-hits-norm -G /project/bf528/project_2/reference/annot/mm9.gtf -b /project/bf528/project_2/reference/mm9.fa -u -o $dir/P0_1_cufflinks -p 16 $dir/accepted_hits.bam
+ 
+echo "Job finished: $(date +%F)"

@@ -1,0 +1,16 @@
+#!/bin/bash -l
+
+#$ -P bf528
+#$ -cwd
+#$ -j y
+#$ -pe mpi_16_tasks_per_node 16
+
+echo "Running job $JOB_ID"
+echo "Started: $(date +%F)"
+echo "Running in directory: $PWD"
+
+# your commands here
+fastq-dump -I --split-files /projectnb/bf528/users/lava-lamp/project-2-lava-lamp-1/samples/P0_1.sra 
+ #convert prefetched run from SRA to fastQ in 2 fastQ files
+
+echo "Job finished: $(date +%F)"
