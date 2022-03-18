@@ -1,0 +1,41 @@
+library(tidyverse)
+library(ggplot2)
+#set working directory to /projectnb/bf528/users/lava-lamp/project-2-lava-lamp-1/samples/cuffdiff_out/gene_exp.diff
+
+#First, we need to load in the file and produce a table with the top 10 
+
+cuffdiff <- read.table("/projectnb/bf528/users/lava-lamp/project-2-lava-lamp-1/samples/cuffdiff_out/gene_exp.diff", header = TRUE)
+
+#Next produce a table with the top 10 differentially expressed genes, with their names, 
+#FPKM values, log fold change, p-value, and q-value
+
+ordered_cuffdiff <- cuffdiff[order(cuffdiff$q_value, na.last = TRUE, decreasing = FALSE),]
+diff_express <- ordered_cuffdiff[1:10,]
+diff_express_ten <- diff_express[-c(1:2, 4:7, 11, 14)] #This is table of the top 10 differentially expressed genes and statistics
+
+#Next we need to produce a histogram of the log2.fold_genes and their frequencies
+#for all of the given genes 
+log2.fold_genes <- cuffdiff$log2.fold_change.
+log_histogram <- hist(log2.fold_genes, breaks = 60)
+
+#Use subset function to create a dataframe with significant values
+significant_gene_data <- subset(ordered_cuffdiff, significant == "yes")
+
+#Produce histogram with significant values 
+significant_gene_log2 <- significant_gene_data$log2.fold_change.
+significant_histogram <- hist(significant_gene_log2, breaks = 60)
+
+#Separate Data Tables. One for the Up-Regulated Genes. Another for Down-Regulated Genes
+significant_gene_data <- significant_gene_data[order(significant_gene_data$q_value),]
+up_regulated_genes <- subset(significant_gene_data, log2.fold_change. >= 0)
+down_regulated_genes <- subset(significant_gene_data, log2.fold_change. < 0)
+
+#Write out the 2 Tables from above
+up_regulated_file <- write.csv(up_regulated_genes$gene, "/usr4/bf528/sv/Documents/BF_528_Project_2/Up_Regulated.csv", row.names = FALSE, col.names = FALSE)
+down_regualted_file <- write.csv(down_regulated_genes$gene, "/usr4/bf528/sv/Documents/BF_528_Project_2/Down_Regulated.csv", row.names = FALSE, col.names = FALSE)
+
+
+
+
+
+
