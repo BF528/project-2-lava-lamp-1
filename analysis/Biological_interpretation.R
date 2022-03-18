@@ -23,8 +23,8 @@ fpkm_all$Ad<- rowMeans(fpkm_all%>% select(Ad_1_FPKM,Ad_2_FPKM), na.rm=TRUE)
 #Create the final fpkm data frame to plot.
 fpkm_final<-fpkm_all%>% select(gene_short_name,P0,P4,P7,Ad)
 sarc<-list('Pdlim5','Pygm','Myoz2','Des','Csrp3','Tcap','Cryab')
-mito<-list('Mpc1','Prdx3','Acat1','Echs1','Sic25a11','Phyh')
-cc<-list('Cdc7','E2f8','Cdk7','Cdc26','Cdc6','E2f1','Bora','Cdc45','Rad51','Aurkb','Cdc23')
+mito<-list('Mpc1','Prdx3','Acat1','Echs1','Slc25a11','Phyh')
+cc<-list('Cdc7','E2f8','Cdk7','Cdc26','Cdc6','E2f1','Cdc27','Bora','Cdc45','Rad51','Aurkb','Cdc23')
 x<-list('P0','P4','P7','AD')
 
 temp_1 <- filter(fpkm_final, gene_short_name %in% sarc)%>%
