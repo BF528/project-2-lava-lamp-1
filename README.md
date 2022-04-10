@@ -10,4 +10,4 @@ Mano Ranaweera
 
 # Repository Contents
 
-This repository contains the scripts used for Transcriptional Profile of Mammalian Cardiac Regeneration with mRNA-seq. 
+This Repository contains the scripts used for Transcriptional Profile of Mammalian Cardiac Regeneration with mRNA-seq. 
